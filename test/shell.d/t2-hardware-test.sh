@@ -35,6 +35,10 @@ grep -Fq 'install -D -m 0644' "$fix_t2" &&
   fail "fresh T2 setup installs the touchpad integration rule with fixed permissions"
 grep -Fq '106b:180[12]' "$touchpad_migration" ||
   fail "T2 touchpad migration is limited to T2 hardware"
+grep -Fq 'apple-bcm-firmware-fetcher' "$fix_t2" ||
+  fail "T2 setup installs the firmware fetcher"
+grep -Fq 'apple-bcm-firmware-fetcher' "$other_packages" ||
+  fail "the default package list installs the firmware fetcher"
 pass "fresh T2 setup uses t2bce-compatible suspend, fan, and Touch Bar defaults"
 
 test_tmp=$(mktemp -d)
